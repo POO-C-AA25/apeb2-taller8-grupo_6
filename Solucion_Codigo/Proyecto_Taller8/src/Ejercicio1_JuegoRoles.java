@@ -7,15 +7,14 @@ public class Ejercicio1_JuegoRoles {
 
     static Personaje guerrero;
     static Personaje mago;
-    static Personaje arquero;   
+    static Personaje arquero;
 
     public static void main(String[] args) {
         guerrero = new Guerrero("Gigante", 30);
         mago = new Mago("Sigilo", 10);
         arquero = new Arquero("Veneno", 20);
-
-        Personaje.batalla(guerrero, mago);
-
+        Combate simuladorComb = new Combate();
+        simuladorComb.batalla(guerrero, mago);
     }
 }
 
@@ -35,51 +34,6 @@ abstract class Personaje {
     public Personaje(int defensa) {
         this.vidas = 100;
         this.defensa = defensa;
-    }
-    //Metodo para comprobar la batalla
-    public static void batalla(Personaje personaje1, Personaje personaje2) {
-        int dañoRealizado = 0;
-        
-        while (personaje1.vidas > 0 && personaje2.vidas > 0){
-            
-            
-            //En cada iteracion se calcula un daño de ambos personaje maximo 20
-            personaje1.daño = 10 + (int)(Math.random() * (31));
-            personaje2.daño = 10 + (int)(Math.random() * (31));
-           
-
-            //Daño para personaje 1 al 2
-            dañoRealizado = Math.max(0, personaje1.daño - personaje2.defensa);
-
-            personaje2.vidas -= dañoRealizado;
-            
-            //Se imprime el toString para el que recibio el daño
-            System.out.println(personaje2.toString());
-
-            //Daño del personaje 2 al 1
-            dañoRealizado = Math.max(0, personaje2.daño - personaje1.defensa);
-
-            personaje1.vidas -= dañoRealizado;
-            
-            System.out.println(personaje1.toString());  
-            
-            if(personaje1.vidas > 0 && personaje2.vidas <= 0){
-                System.out.println("Personaje 1 gana. ");
-                personaje1.batallasGanadas += 1;
-                personaje1.experiencia += 1;
-                
-                System.out.println(personaje1.toString());
-                return;
-            }else if(personaje2.vidas > 0 && personaje1.vidas <= 0){
-                System.out.println("Personaje 2 gana. ");
-                personaje2.batallasGanadas += 1;
-                personaje2.experiencia += 1;
-                
-                System.out.println(personaje2.toString());
-                return;
-            }
-        };
-
     }
 
     //toString
@@ -102,9 +56,8 @@ class Guerrero extends Personaje {
         super(defensa);
         this.habilidades = habilidades;
     }
-    
-    //toString
 
+    //toString
     @Override
     public String toString() {
         return String.format(
@@ -162,5 +115,53 @@ class Arquero extends Personaje {
                 atributo, super.toString()
         );
     }
+}
 
+class Combate {
+
+    public Combate() {
+    }
+
+    //Metodo para comprobar la batalla
+    public static void batalla(Personaje personaje1, Personaje personaje2) {
+        int dañoRealizado = 0;
+
+        while (personaje1.vidas > 0 && personaje2.vidas > 0) {
+
+            //En cada iteracion se calcula un daño de ambos personaje maximo 20
+            personaje1.daño = 10 + (int) (Math.random() * (31));
+            personaje2.daño = 10 + (int) (Math.random() * (31));
+
+            //Daño para personaje 1 al 2
+            dañoRealizado = Math.max(0, personaje1.daño - personaje2.defensa);
+
+            personaje2.vidas -= dañoRealizado;
+
+            //Se imprime el toString para el que recibio el daño
+            System.out.println(personaje2.toString());
+
+            //Daño del personaje 2 al 1
+            dañoRealizado = Math.max(0, personaje2.daño - personaje1.defensa);
+
+            personaje1.vidas -= dañoRealizado;
+
+            System.out.println(personaje1.toString());
+
+            if (personaje1.vidas > 0 && personaje2.vidas <= 0) {
+                System.out.println("Personaje 1 gana. ");
+                personaje1.batallasGanadas += 1;
+                personaje1.experiencia += 1;
+
+                System.out.println(personaje1.toString());
+                return;
+            } else if (personaje2.vidas > 0 && personaje1.vidas <= 0) {
+                System.out.println("Personaje 2 gana. ");
+                personaje2.batallasGanadas += 1;
+                personaje2.experiencia += 1;
+
+                System.out.println(personaje2.toString());
+                return;
+            }
+        };
+    }
 }
