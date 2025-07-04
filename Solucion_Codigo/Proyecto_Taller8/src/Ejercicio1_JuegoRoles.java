@@ -44,12 +44,12 @@ abstract class Personaje {
             
             
             //En cada iteracion se calcula un daño de ambos personaje maximo 20
-            personaje1.daño = (int)(Math.random() * 50);
-            personaje2.daño = (int) (Math.random() * 50);
+            personaje1.daño = 10 + (int)(Math.random() * (31));
+            personaje2.daño = 10 + (int)(Math.random() * (31));
            
 
             //Daño para personaje 1 al 2
-            dañoRealizado = personaje1.daño - personaje2.defensa;
+            dañoRealizado = Math.max(0, personaje1.daño - personaje2.defensa);
 
             personaje2.vidas -= dañoRealizado;
             
@@ -57,7 +57,7 @@ abstract class Personaje {
             System.out.println(personaje2.toString());
 
             //Daño del personaje 2 al 1
-            dañoRealizado = personaje2.daño - personaje1.defensa;
+            dañoRealizado = Math.max(0, personaje2.daño - personaje1.defensa);
 
             personaje1.vidas -= dañoRealizado;
             
@@ -67,11 +67,15 @@ abstract class Personaje {
                 System.out.println("Personaje 1 gana. ");
                 personaje1.batallasGanadas += 1;
                 personaje1.experiencia += 1;
+                
+                System.out.println(personaje1.toString());
                 return;
             }else if(personaje2.vidas > 0 && personaje1.vidas <= 0){
                 System.out.println("Personaje 2 gana. ");
                 personaje2.batallasGanadas += 1;
                 personaje2.experiencia += 1;
+                
+                System.out.println(personaje2.toString());
                 return;
             }
         };
