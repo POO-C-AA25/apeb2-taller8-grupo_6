@@ -7,6 +7,6 @@
  *
  * @author Usuario
  */
-public class Ejericio5_EmprendimientosLoja {
+public class Ejercicio5_EmprendimientosLoja {
     
 }

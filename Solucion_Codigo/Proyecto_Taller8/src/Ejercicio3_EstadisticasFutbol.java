@@ -7,6 +7,6 @@
  *
  * @author Usuario
  */
-public class Ejericio3_EstadisticasFutbol {
+public class Ejercicio3_EstadisticasFutbol {
     
 }
