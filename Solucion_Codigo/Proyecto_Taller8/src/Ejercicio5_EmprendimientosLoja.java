@@ -145,6 +145,7 @@ class FeriaTecnologica extends Evento {
             }
         }
     }
+    
 }
 
 class FeriaAgricola extends Evento {
